@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>qlix-accordion Accordion 1</title>
+</head>
+
+<body>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			overflow-x: hidden;
+		}
+
+		:root {
+			/* --font-family-- */
+			--font-primary: "Poppins", sans-serif;
+
+			--qlix-accordion-section-pt: 80px;
+			--qlix-accordion-section-pb: 80px;
+			--qlix-accordion-section-bg: #ffffff;
+
+			--qlix-accordion-container-width: 1360px;
+			--qlix-accordion-container-pl: 20px;
+			--qlix-accordion-container-pr: 20px;
+
+			--qlix-accordion-header-width: 700px;
+			--qlix-accordion-header-mb: 48px;
+
+			--qlix-accordion-header-title-fs: 36px;
+			--qlix-accordion-header-title-fw: 600;
+			--qlix-accordion-header-title-lh: 1.2;
+			--qlix-accordion-header-title-color: #000000;
+
+			--qlix-accordion-header-text-fs: 16px;
+			--qlix-accordion-header-text-fw: 400;
+			--qlix-accordion-header-text-lh: 1.4;
+			--qlix-accordion-header-text-color: #000000;
+			--qlix-accordion-header-text-mt: 12px;
+
+			--qlix-accordion-items-gap: 12px;
+			--qlix-accordion-items-mw: 700px;
+			--qlix-accordion-items-ml: auto;
+			--qlix-accordion-items-mr: auto;
+
+			--qlix-accordion-item-border-w: 1px;
+			--qlix-accordion-item-border-color: #f2f2f2;
+			--qlix-accordion-item-radius: 6px;
+			--qlix-accordion-item-transition: .3s;
+			--qlix-accordion-item-active-bc: #00B207;
+
+			--qlix-accordion-item-title-wrap-gap: 10px;
+			--qlix-accordion-item-title-wrap-pt: 12px;
+			--qlix-accordion-item-title-wrap-pr: 16px;
+			--qlix-accordion-item-title-wrap-pb: 12px;
+			--qlix-accordion-item-title-wrap-pl: 16px;
+			--qlix-accordion-item-title-wrap-bg: #F2f2f2;
+			--qlix-accordion-item-title-wrap-active-bg: transparent;
+			--qlix-accordion-item-title-wrap-transition: .3s;
+
+			--qlix-accordion-item-title-fs: 16px;
+			--qlix-accordion-item-title-fw: 500;
+			--qlix-accordion-item-title-lh: 23px;
+			--qlix-accordion-item-title-transition: .3s;
+			--qlix-accordion-item-title-active-color: #00B207;
+
+			--qlix-accordion-item-icon-w: 32px;
+			--qlix-accordion-item-icon-mw: 32px;
+			--qlix-accordion-item-icon-h: 32px;
+			--qlix-accordion-item-icon-r: 100px;
+			--qlix-accordion-item-icon-bg: #ffffff;
+			--qlix-accordion-item-icon-active-bg: #f2f2f2;
+			--qlix-accordion-item-icon-transition: .3s;
+
+			--qlix-accordion-item-icon-svg-w: 12px;
+			--qlix-accordion-item-icon-svg-h: 12px;
+			--qlix-accordion-item-icon-svg-transition: .3s;
+			--qlix-accordion-item-icon-svg-color: #000000;
+			--qlix-accordion-item-icon-svg-active-rotate: 405deg;
+
+			--qlix-accordion-item-content-inner-pt: 16px;
+			--qlix-accordion-item-content-inner-pb: 16px;
+			--qlix-accordion-item-content-inner-pl: 16px;
+			--qlix-accordion-item-content-inner-pr: 16px;
+			--qlix-accordion-item-content-inner-bw: 1px;
+			--qlix-accordion-item-content-inner-bc: #00B207;
+
+			--qlix-accordion-item-content: 0.4s;
+
+			--qlix-accordion-content-items-gap: 16px;
+
+			--qlix-accordion-content-item-gap: 12px;
+
+			--qlix-accordion-content-item-title-fs: 14px;
+			--qlix-accordion-content-item-title-fw: 500;
+			--qlix-accordion-content-item-title-lh: 21px;
+			--qlix-accordion-content-item-title-color: #000000;
+
+			--qlix-accordion-content-item-text-fs: 14px;
+			--qlix-accordion-content-item-text-fw: 400;
+			--qlix-accordion-content-item-text-lh: 20px;
+			--qlix-accordion-content-item-text-color: #000000;
+
+			--qlix-accordion-content-item-list-ml: 18px;
+			--qlix-accordion-content-item-list-gap: 3px;
+
+			--qlix-accordion-content-item-list-item-fs: 14px;
+			--qlix-accordion-content-item-list-item-fw: 400;
+			--qlix-accordion-content-item-list-item-lh: 20px;
+			--qlix-accordion-content-item-list-item-color: #000000;
+		}
+
+		@media only screen and (max-width: 992px) {
+			:root {
+				--qlix-accordion-section-pt: 40px;
+				--qlix-accordion-section-pb: 40px;
+
+				--qlix-accordion-header-mb: 40px;
+			}
+		}
+
+		@media only screen and (max-width: 575px) {
+			:root {
+
+				--qlix-accordion-section-pt: 24px;
+				--qlix-accordion-section-pb: 24px;
+
+				--qlix-accordion-container-pl: 16px;
+				--qlix-accordion-container-pr: 16px;
+
+				--qlix-accordion-header-mb: 24px;
+
+				--qlix-accordion-header-title-fs: 24px;
+
+				--qlix-accordion-header-text-fs: 14px;
+				--qlix-accordion-header-text-lh: 20px;
+				--qlix-accordion-header-text-mt: 8px;
+			}
+		}
+
+		/* qlix-accordion section css start */
+		.qlix-accordion-section {
+			padding-top: var(--qlix-accordion-section-pt);
+			padding-bottom: var(--qlix-accordion-section-pb);
+			background: var(--qlix-accordion-section-bg);
+		}
+
+		.qlix-accordion-container {
+			max-width: var(--qlix-accordion-container-width);
+			margin-left: auto;
+			margin-right: auto;
+			padding-left: var(--qlix-accordion-container-pl);
+			padding-right: var(--qlix-accordion-container-pr);
+		}
+
+		.qlix-accordion-header {
+			max-width: var(--qlix-accordion-header-width);
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: var(--qlix-accordion-header-mb);
+			text-align: center;
+		}
+
+		.qlix-accordion-header-title {
+			font-family: var(--font-primary);
+			font-size: var(--qlix-accordion-header-title-fs);
+			font-weight: var(--qlix-accordion-header-title-fw);
+			text-transform: capitalize;
+			line-height: var(--qlix-accordion-header-title-lh);
+			color: var(--qlix-accordion-header-title-color);
+		}
+
+		.qlix-accordion-header-text {
+			font-family: var(--font-primary);
+			font-size: var(--qlix-accordion-header-text-fs);
+			font-weight: var(--qlix-accordion-header-text-fw);
+			line-height: var(--qlix-accordion-header-text-lh);
+			margin-top: var(--qlix-accordion-header-text-mt);
+			color: var(--qlix-accordion-header-text-color);
+		}
+
+		.qlix-accordion-items {
+			display: flex;
+			flex-direction: column;
+			gap: var(--qlix-accordion-items-gap);
+			max-width: var(--qlix-accordion-items-mw);
+			margin-left: var(--qlix-accordion-items-ml);
+			margin-right: var(--qlix-accordion-items-mr);
+		}
+
+		.qlix-accordion-item {
+			border: var(--qlix-accordion-item-border-w) solid var(--qlix-accordion-item-border-color);
+			border-radius: var(--qlix-accordion-item-radius);
+			overflow: hidden;
+			transition: all ease var(--qlix-accordion-item-transition);
+		}
+
+		.qlix-accordion-item.active {
+			border-color: var(--qlix-accordion-item-active-bc);
+		}
+
+		.qlix-accordion-item-title-wrap {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			cursor: pointer;
+			gap: var(--qlix-accordion-item-title-wrap-gap);
+			padding-top: var(--qlix-accordion-item-title-wrap-pt);
+			padding-right: var(--qlix-accordion-item-title-wrap-pr);
+			padding-bottom: var(--qlix-accordion-item-title-wrap-pb);
+			padding-left: var(--qlix-accordion-item-title-wrap-pl);
+			background: var(--qlix-accordion-item-title-wrap-bg);
+			transition: var(--qlix-accordion-item-title-wrap-transition);
+		}
+
+		.qlix-accordion-item.active .qlix-accordion-item-title-wrap {
+			background: var(--qlix-accordion-item-title-wrap-active-bg);
+		}
+
+		.qlix-accordion-item-title {
+			text-transform: capitalize;
+			font-size: var(--qlix-accordion-item-title-fs);
+			transition: var(--qlix-accordion-item-title-transition);
+			font-weight: var(--qlix-accordion-item-title-fw);
+			user-select: none;
+			line-height: var(--qlix-accordion-item-title-lh);
+			font-family: var(--font-primary);
+		}
+
+		.qlix-accordion-item.active .qlix-accordion-item-title-wrap .qlix-accordion-item-title {
+			color: var(--qlix-accordion-item-title-active-color);
+		}
+
+		.qlix-accordion-item-icon {
+			display: flex;
+			transition: ease var(--qlix-accordion-item-icon-transition);
+			width: var(--qlix-accordion-item-icon-w);
+			min-width: var(--qlix-accordion-item-icon-mw);
+			height: var(--qlix-accordion-item-icon-h);
+			border-radius: var(--qlix-accordion-item-icon-r);
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: var(--qlix-accordion-item-icon-bg);
+		}
+
+		.qlix-accordion-item.active .qlix-accordion-item-title-wrap .qlix-accordion-item-icon {
+			background: var(--qlix-accordion-item-icon-active-bg);
+		}
+
+		.qlix-accordion-item-icon svg {
+			width: var(--qlix-accordion-item-icon-svg-w);
+			height: var(--qlix-accordion-item-icon-svg-h);
+			transition: all ease var(--qlix-accordion-item-icon-svg-transition);
+		}
+
+		.qlix-accordion-item-icon svg path {
+			stroke: var(--qlix-accordion-item-icon-svg-color);
+		}
+
+		.qlix-accordion-item.active .qlix-accordion-item-title-wrap .qlix-accordion-item-icon svg {
+			transform: rotate(var(--qlix-accordion-item-icon-svg-active-rotate));
+		}
+
+		.qlix-accordion-item-content-inner {
+			padding-top: var(--qlix-accordion-item-content-inner-pt);
+			padding-bottom: var(--qlix-accordion-item-content-inner-pb);
+			padding-left: var(--qlix-accordion-item-content-inner-pl);
+			padding-right: var(--qlix-accordion-item-content-inner-pr);
+			border-top: var(--qlix-accordion-item-content-inner-bw) solid var(--qlix-accordion-item-content-inner-bc);
+		}
+
+		.qlix-accordion-item-content {
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height var(--qlix-accordion-item-content) ease;
+		}
+
+		.qlix-accordion-content-items {
+			display: flex;
+			flex-direction: column;
+			gap: var(--qlix-accordion-content-items-gap);
+		}
+
+		.qlix-accordion-content-item {
+			display: flex;
+			flex-direction: column;
+			gap: var(--qlix-accordion-content-item-gap);
+		}
+
+		.qlix-accordion-content-item-title {
+			font-size: var(--qlix-accordion-content-item-title-fs);
+			font-weight: var(--qlix-accordion-content-item-title-fw);
+			line-height: var(--qlix-accordion-content-item-title-lh);
+			color: var(--qlix-accordion-content-item-title-color);
+			font-family: var(--font-primary);
+		}
+
+		.qlix-accordion-content-item-text {
+			font-size: var(--qlix-accordion-content-item-text-fs);
+			font-weight: var(--qlix-accordion-content-item-text-fw);
+			line-height: var(--qlix-accordion-content-item-text-lh);
+			color: var(--qlix-accordion-content-item-text-color);
+			font-family: var(--font-primary);
+		}
+
+		.qlix-accordion-content-item-list {
+			margin-left: var(--qlix-accordion-content-item-list-ml);
+			display: flex;
+			flex-direction: column;
+			gap: var(--qlix-accordion-content-item-list-gap);
+		}
+
+		.qlix-accordion-content-item-list-item {
+			list-style-type: disc;
+			font-size: var(--qlix-accordion-content-item-list-item-fs);
+			font-weight: var(--qlix-accordion-content-item-list-item-fw);
+			line-height: var(--qlix-accordion-content-item-list-item-lh);
+			color: var(--qlix-accordion-content-item-list-item-color);
+			font-family: var(--font-primary);
+		}
+
+		/* qlix-accordion section css end */
+
+		@media only screen and (max-width: 575px) {}
+	</style>
+
+	<!-- qlix-accordions section start -->
+	<section class="qlix-accordion-section">
+		<div class="qlix-accordion-container">
+			<div class="qlix-accordion-header">
+				<h2 class="qlix-accordion-header-title">FAQs</h2>
+				<p class="qlix-accordion-header-text">Frequently asked questions</p>
+			</div>
+			<div class="qlix-accordion-items">
+				<div class="qlix-accordion-item">
+					<div class="qlix-accordion-item-title-wrap">
+						<h3 class="qlix-accordion-item-title">Is this section compatible with all Shopify themes?</h3>
+						<span class="qlix-accordion-item-icon">
+							<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0.75 4.75H8.75M4.75 0.75V8.75V0.75Z" stroke="#1A1A1A" stroke-width="1.5"
+									stroke-linecap="round" stroke-linejoin="round"></path>
+							</svg>
+						</span>
+					</div>
+					<div class="qlix-accordion-item-content">
+						<div class="qlix-accordion-item-content-inner">
+							<div class="qlix-accordion-content-items">
+								<div class="qlix-accordion-content-item">
+									<h4 class="qlix-accordion-content-item-title">Yes, it works with most modern Shopify themes.</h4>
+									<p class="qlix-accordion-content-item-text">Our sections are built using Shopify's Online Store 2.0
+										architecture and follow Shopify development best practices. They integrate seamlessly with most
+										modern themes without requiring custom coding. If your theme supports sections, you can quickly add,
+										customize, and publish the content.</p>
+									<ul class="qlix-accordion-content-item-list">
+										<li class="qlix-accordion-content-item-list-item">Compatible with Online Store 2.0 themes</li>
+										<li class="qlix-accordion-content-item-list-item">No coding required for setup</li>
+										<li class="qlix-accordion-content-item-list-item">Works with free and premium themes</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="qlix-accordion-item">
+					<div class="qlix-accordion-item-title-wrap">
+						<h3 class="qlix-accordion-item-title">Can I customize the design without coding?</h3>
+						<span class="qlix-accordion-item-icon">
+							<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0.75 4.75H8.75M4.75 0.75V8.75V0.75Z" stroke="#1A1A1A" stroke-width="1.5"
+									stroke-linecap="round" stroke-linejoin="round"></path>
+							</svg>
+						</span>
+					</div>
+					<div class="qlix-accordion-item-content">
+						<div class="qlix-accordion-item-content-inner">
+							<div class="qlix-accordion-content-items">
+								<div class="qlix-accordion-content-item">
+									<h4 class="qlix-accordion-content-item-title">Every section is fully customizable.</h4>
+									<p class="qlix-accordion-content-item-text">You can easily change colors, typography, spacing,
+										layouts, buttons, and other design elements directly from the Shopify Theme Editor. The settings are
+										designed to give you complete control while keeping the editing experience simple and intuitive.</p>
+									<ul class="qlix-accordion-content-item-list">
+										<li class="qlix-accordion-content-item-list-item">Edit colors and fonts</li>
+										<li class="qlix-accordion-content-item-list-item">Adjust spacing and layouts</li>
+										<li class="qlix-accordion-content-item-list-item">Customize buttons, icons, and images</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="qlix-accordion-item">
+					<div class="qlix-accordion-item-title-wrap">
+						<h3 class="qlix-accordion-item-title">Will adding these sections affect my store performance?</h3>
+						<span class="qlix-accordion-item-icon">
+							<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0.75 4.75H8.75M4.75 0.75V8.75V0.75Z" stroke="#1A1A1A" stroke-width="1.5"
+									stroke-linecap="round" stroke-linejoin="round"></path>
+							</svg>
+						</span>
+					</div>
+					<div class="qlix-accordion-item-content">
+						<div class="qlix-accordion-item-content-inner">
+							<div class="qlix-accordion-content-items">
+								<div class="qlix-accordion-content-item">
+									<h4 class="qlix-accordion-content-item-title">Performance is one of our top priorities.</h4>
+									<p class="qlix-accordion-content-item-text">Our sections are carefully optimized with clean HTML, CSS,
+										and JavaScript to minimize unnecessary code. Lightweight assets and efficient loading techniques
+										help maintain fast page speeds and provide a smooth shopping experience for your customers.</p>
+									<ul class="qlix-accordion-content-item-list">
+										<li class="qlix-accordion-content-item-list-item">Lightweight and optimized code</li>
+										<li class="qlix-accordion-content-item-list-item">Fast loading experience</li>
+										<li class="qlix-accordion-content-item-list-item">SEO-friendly structure</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="qlix-accordion-item">
+					<div class="qlix-accordion-item-title-wrap">
+						<h3 class="qlix-accordion-item-title">Do I receive updates after purchasing?</h3>
+						<span class="qlix-accordion-item-icon">
+							<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0.75 4.75H8.75M4.75 0.75V8.75V0.75Z" stroke="#1A1A1A" stroke-width="1.5"
+									stroke-linecap="round" stroke-linejoin="round"></path>
+							</svg>
+						</span>
+					</div>
+					<div class="qlix-accordion-item-content">
+						<div class="qlix-accordion-item-content-inner">
+							<div class="qlix-accordion-content-items">
+								<div class="qlix-accordion-content-item">
+									<h4 class="qlix-accordion-content-item-title">Yes, regular updates are included.</h4>
+									<p class="qlix-accordion-content-item-text">We continuously improve our sections by adding new
+										features, fixing bugs, and maintaining compatibility with the latest Shopify updates. You can easily
+										install new versions to keep your store up to date.</p>
+									<ul class="qlix-accordion-content-item-list">
+										<li class="qlix-accordion-content-item-list-item">Ongoing feature improvements</li>
+										<li class="qlix-accordion-content-item-list-item">Bug fixes and optimizations</li>
+										<li class="qlix-accordion-content-item-list-item">Compatibility with Shopify updates</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="qlix-accordion-item">
+					<div class="qlix-accordion-item-title-wrap">
+						<h3 class="qlix-accordion-item-title">What kind of support do you provide?</h3>
+						<span class="qlix-accordion-item-icon">
+							<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0.75 4.75H8.75M4.75 0.75V8.75V0.75Z" stroke="#1A1A1A" stroke-width="1.5"
+									stroke-linecap="round" stroke-linejoin="round"></path>
+							</svg>
+						</span>
+					</div>
+					<div class="qlix-accordion-item-content">
+						<div class="qlix-accordion-item-content-inner">
+							<div class="qlix-accordion-content-items">
+								<div class="qlix-accordion-content-item">
+									<h4 class="qlix-accordion-content-item-title">Our support team is here to help.</h4>
+									<p class="qlix-accordion-content-item-text">If you have questions about installation, customization,
+										or troubleshooting, our support team is available to assist you. We strive to provide timely
+										responses and practical solutions so you can focus on growing your business.</p>
+									<ul class="qlix-accordion-content-item-list">
+										<li class="qlix-accordion-content-item-list-item">Installation assistance</li>
+										<li class="qlix-accordion-content-item-list-item">Customization guidance</li>
+										<li class="qlix-accordion-content-item-list-item">Friendly and responsive support</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- qlix-accordions section end -->
+
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const items = document.querySelectorAll(".qlix-accordion-item");
+
+			// Open active item on page load
+			items.forEach((item) => {
+				if (item.classList.contains("active")) {
+					const content = item.querySelector(".qlix-accordion-item-content");
+					content.style.maxHeight = content.scrollHeight + "px";
+				}
+			});
+
+			items.forEach((item) => {
+				const header = item.querySelector(".qlix-accordion-item-title-wrap");
+				const content = item.querySelector(".qlix-accordion-item-content");
+
+				header.addEventListener("click", () => {
+					const isActive = item.classList.contains("active");
+
+					// Close all items
+					items.forEach((otherItem) => {
+						otherItem.classList.remove("active");
+						otherItem.querySelector(".qlix-accordion-item-content").style.maxHeight = null;
+					});
+
+					// Open clicked item if it wasn't already active
+					if (!isActive) {
+						item.classList.add("active");
+						content.style.maxHeight = content.scrollHeight + "px";
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>
