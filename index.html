@@ -645,7 +645,7 @@
 	<!-- qlix-accordions section end -->
 
 	<!-- qlix-accordions section start -->
-	<section class="qlix-accordion-section all-item-open">
+	<section class="qlix-accordion-section toggle-item">
 		<div class="qlix-accordion-container">
 			<div class="qlix-accordion-header">
 				<h2 class="qlix-accordion-header-title">all item open FAQs</h2>
@@ -819,7 +819,9 @@
 				// DEFAULT OPEN
 				// ==========================
 
-				if (section.classList.contains("all-item-open")) {
+				if (section.classList.contains("toggle-item") && items.length) {
+					openItem(items[0]);
+				} else if (section.classList.contains("all-item-open")) {
 					items.forEach(openItem);
 				} else if (section.classList.contains("first-item-open") && items.length) {
 					openItem(items[0]);
@@ -856,6 +858,15 @@
 						const isActive = item.classList.contains("active");
 
 						// all-item-open mode
+						if (section.classList.contains("toggle-item")) {
+							if (isActive) {
+								closeItem(item);
+							} else {
+								openItem(item);
+							}
+							return;
+						}
+
 						if (section.classList.contains("all-item-open")) {
 							if (isActive) {
 								closeItem(item);
